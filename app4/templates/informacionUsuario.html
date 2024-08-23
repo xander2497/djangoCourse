@@ -1,0 +1,275 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vista de ingreso</title>
+        <!--Importar bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!--Importar fontAwesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!--Importar scripts de javascript-->
+        <script src="{% static 'js/informacionUsuario.js' %}"></script>
+    </head>
+    <body>
+        <div class="bg-primary">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-4 mt-3 mb-3 text-white">
+                        <div class="row">
+                            <h5>Bienvenido {{ user.first_name }} {{ user.last_name }}</h5>
+                        </div>
+                        <div class="row">
+                            <h5>{{ user.datosusuario.profesion }}</h5>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <a class="btn btn-success" href="{% url 'app4:cerrarSesion' %}"><i class="fa-solid fa-right-to-bracket"></i> Salir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3 mb-3">
+            <div>
+                <a href="#" class="btn btn-info">Panel de control <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="mt-5 text-center mb-3">
+            <h1 id="pruebaJs">Informacion del usuario : {{ user.first_name }} {{ user.last_name }}</h1>
+        </div>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-5 bg-light" style="border-radius: 20px;">
+                    <div class="row mb-2 mt-2">
+                        <div class="col-5">
+                            <h5>Nombre completo : </h5>
+                        </div>
+                        <div class="col-7">
+                            <i>{{ user.first_name }} {{ user.last_name }}</i>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-5">
+                            <h5>Nombre de usuario : </h5>
+                        </div>
+                        <div class="col-7">
+                            <i>{{ user.username }}</i>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-5">
+                            <h5>Email : </h5>
+                        </div>
+                        <div class="col-7">
+                            <i>{{ user.email }}</i>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-5">
+                            <h5>Profesion del usuario : </h5>
+                        </div>
+                        <div class="col-7">
+                            <i>{{ user.datosusuario.profesion }}</i>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-5">
+                            <h5>Nro de celular : </h5>
+                        </div>
+                        <div class="col-7">
+                            <i>{{ user.datosusuario.nroCelular }}</i>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="row mb-2">
+                        <div class="col-5">
+                            <h5>Tipo de usuario : </h5>
+                        </div>
+                        <div class="col-7">
+                            <i>TIPO</i>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-5">
+                            <h5>Fecha de registro : </h5>
+                        </div>
+                        <div class="col-7">
+                            <i>FECHA</i>
+                        </div>
+                    </div>
+                    -->
+                </div>
+                <div class="col-5 bg-light h-100" style="border-radius: 20px;">
+                    <div class="row mb-2 mt-2">
+                        <div class="col-5">
+                            <h5>Perfil : </h5>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <i>{{ user.datosusuario.perfilUsuario }}</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 text-center mb-3">
+            <h3>Publicaciones del usuario</h3>
+        </div>
+        <div class="container mt-5">
+            <div class="row justify-content-between">
+                <div class="col-2 text-start">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#nuevaTarea"><i class="fa-solid fa-calendar-plus"></i> Nuevo Tweet</button>
+                </div>
+                <div class="col-2 text-end">
+                    <a class="btn btn-success" href="{% url 'app4:descargarReporte' %}"><i class="fa-solid fa-download"></i> Descargar</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                            <th>Autor</th>
+                            <th>Titulo</th>
+                            <th>Ver tweet</th>
+                            <th>Eliminar</th>
+                        </thead>
+                        <tbody>
+                            {% for pubInfo in allPubs %}
+                            <tr>
+                                <td>{{ pubInfo.autorPublicacion.username }}</td>
+                                <td>{{ pubInfo.titulo }}</td>
+                                <td><button data-bs-toggle="modal" id="{{ pubInfo.id }}" onclick="devolverPub(this.id)" data-bs-target="#detallePub" class="btn btn-info"><i class="fa-solid fa-eye"></i></button></td>
+                                <td><a class="btn btn-danger" href="{% url 'app4:eliminarPub' pubInfo.id %}"><i class="fa-solid fa-trash"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<!--Nueva Publicacion Tweet-->
+<div class="modal fade" id="nuevaTarea" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post" action="{% url 'app4:crearPublicacion' %}">
+            {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear nueva publicacion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row form-group justify-content-around mb-3">
+                        <div class="col-12">
+                            <label>Titulo</label>
+                            <input class="form-control" type="text" name="tituloPub" required>
+                        </div>
+                        <!--
+                        <div class="col-5">
+                            <label>Responsable de la tarea</label>
+                            <select class="form-select" name="responsableTarea" required></select>
+                        </div>-->
+                    </div>
+                    <!--
+                    <div class="row form-group justify-content-around mb-3">
+                        <div class="col-5">
+                            <label>Fecha de inicio</label>
+                            <input class="form-control" type="date" required name="fechaInicio">
+                        </div>
+                        <div class="col-5">
+                            <label>Fecha de finalizacion</label>
+                            <input class="form-control" type="date" required name="fechaFin">
+                        </div>
+                    </div>-->
+                    <div class="row form-group justify-content-around mb-3">
+                        <div class="col-12">
+                            <label>Descripcion de la publicacion</label>
+                            <textarea class="form-control" type="text" required rows="4" name="descripcionPub"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Detalle Tweet-->
+<div class="modal fade" id="detallePub" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle de la publicacion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h1 style="display: none;" id="idPublicacion"></h1>
+                <div class="row form-group justify-content-around mb-3">
+                    <div class="col-8">
+                        <label>Titulo</label>
+                        <input class="form-control" type="text" readonly id="tituloPub">
+                    </div>
+                    <div class="col-4">
+                        <label>Autor</label>
+                        <input class="form-control" type="text" readonly id="autorPub">
+                    </div>
+                </div>
+                <div class="row form-group justify-content-around mb-3">
+                    <div class="col-12">
+                        <label>Contenido de la publicacion</label>
+                        <textarea class="form-control" type="text" rows="4" readonly id="descripcionPub"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" id="comentariosTotales">
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                Nombre Usuario
+                            </div>
+                            <div class="col-9">
+                                Comentario realizado por un usuario
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                Nombre Usuario
+                            </div>
+                            <div class="col-9">
+                                Comentario realizado por un usuario
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                Nombre Usuario
+                            </div>
+                            <div class="col-9">
+                                Comentario realizado por un usuario
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group justify-content-center">
+                    <div class="col-10">
+                        <input class="form-control" type="text" id="comentarioUsuario">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-info" onclick="enviarComentario()">Comentar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

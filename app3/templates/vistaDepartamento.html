@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ objDepartamento.nombreDepartamento }}
+{% endblock %}
+
+{% block contenido %}
+    <h1>{{ objDepartamento.nombreDepartamento }}</h1>
+    <div>
+        <h4>{{ objDepartamento.descripcionDepartamento }}</h4>
+    </div>
+    <br>
+    {% for personaInfo in listaUsuarios %}
+    <div>
+        <a href="{% url 'app3:vistaUsuario' personaInfo.id %}">{{ personaInfo.nombre }} {{ personaInfo.apellido }}</a>
+    </div>
+    {% endfor %}
+{% endblock %}

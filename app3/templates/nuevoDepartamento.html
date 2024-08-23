@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Nuevo departamento
+{% endblock %}
+
+
+{% block contenido %}
+    <h2>Crear nuevo departamento</h2>
+    <form class="row" method="post" action="{% url 'app3:nuevoDepartamento' %}">
+        {% csrf_token %}
+        <div>
+            <label>Ingresar nombre</label>
+            <input type="text" name="nombreDepartamento">
+        </div>
+        <div>
+            <label>Ingresar descripcion</label>
+            <input type="text" name="descripcionDepartamento">
+        </div>
+        <div>
+            <input type="submit" value="Registrar">
+        </div>
+    </form>
+{% endblock %}

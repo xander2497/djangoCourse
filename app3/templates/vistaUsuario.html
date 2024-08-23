@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ objPersona.nombre }} {{ objPersona.apellido }}
+{% endblock %}
+
+{% block contenido %}
+    <h1>{{ objPersona.nombre }} {{ objPersona.apellido }}</h1>
+    <br>
+    <div>
+        <h4>Numero : {{ objPersona.numero }}</h4>
+    </div>
+    <div>
+        <h4>Email : {{ objPersona.email }}</h4>
+    </div>
+    <div>
+        <h4>Descripcion : {{ objPersona.descripcion }}</h4>
+    </div>
+    <div>
+        <h4>Departamento : {{ objPersona.depaRelacionado.nombreDepartamento }}</h4>
+    </div>
+{% endblock %}

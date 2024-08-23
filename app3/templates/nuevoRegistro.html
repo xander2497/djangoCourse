@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Nuevo registro
+{% endblock %}
+
+
+{% block contenido %}
+    <h2>Crear nuevo registro</h2>
+    <form class="row" method="post" action="{% url 'app3:nuevoRegistro' %}">
+        {% csrf_token %}
+        <div>
+            <label>Ingresar nombre</label>
+            <input type="text" name="nombreRegistro">
+        </div>
+        <div>
+            <label>Ingresar apellido</label>
+            <input type="text" name="apellidoRegistro">
+        </div>
+        <div>
+            <label>Ingresar numero</label>
+            <input type="text" name="numeroRegistro">
+        </div>
+        <div>
+            <label>Ingresar email</label>
+            <input type="text" name="emailRegistro">
+        </div>
+        <div>
+            <label>Ingresar descripcion</label>
+            <input type="text" name="descripcionRegistro">
+        </div>
+        <div>
+            <label>Seleccionar departamento</label>
+            <select name="departamentoSeleccionado" required>
+                <option value="" selected></option>
+                {% for depaInfo in listaDepartamentos %}
+                <option value="{{ depaInfo.id }}">{{ depaInfo.nombreDepartamento }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <input type="submit" value="Registrar">
+        </div>
+    </form>
+{% endblock %}

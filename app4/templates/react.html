@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ejemplo React</title>
+
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+        <style>
+            .nombreTexto{
+                color: blue;
+            }
+        </style>
+    
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/babel">
+
+            function EjemploUsr()
+            {
+                const [state,setState] = React.useState({
+                    usuarios:['Alexander','Diego'],
+                    nuevoUsuario:''
+                })
+
+                function addUser()
+                {
+                    setState({
+                        usuarios:[...state.usuarios,state.nuevoUsuario],
+                        nuevoUsuario:''
+                    })
+                }
+
+                function actualizarNuevoUsuario(event)
+                {
+                    setState({
+                        ...state,
+                        nuevoUsuario: event.target.value
+                    })
+                }
+                return(
+                    <div>
+                        {
+                            state.usuarios.map(usuario =>{
+                                return(
+                                    <App name={usuario}/>
+                                );
+                            })
+                        }
+                        <button onClick={addUser}>Actualizar</button>
+                        <input type='text' value={state.nuevoUsuario} onChange={actualizarNuevoUsuario} />
+                    </div>
+                );
+            }
+
+            function Iterar()
+            {
+                return(
+                    <div>
+                        <App name='Alexander'/>
+                        <App name='Javier'/>
+                        <App name='Diego'/>
+                        <App name='Martin'/>
+                    </div>
+                );
+            }
+
+            function App(props)
+            {
+                return(
+                    <h1 className='nombreTexto'>HOLA {props.name}</h1>
+                );
+            }
+
+
+            ReactDOM.render(<EjemploUsr />,document.querySelector('#app'))
+        </script>
+    </body>
+</html>
